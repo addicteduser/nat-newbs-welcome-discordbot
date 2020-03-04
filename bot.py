@@ -90,14 +90,14 @@ def get_welcome_message(guild, members):
         f'You may also call my human consciousness, aka {get_human_welcome_wagon(guild).mention}, "Jed".\n\n' + \
         f'There is the {channel_tutorial.mention} for D&D related questions that I, ' + \
         f'the {role_admin.mention}, and {role_dm.mention} would be happy to answer. ' + \
-        f'On {channel_tutorial.mention}, you can also find the ALPG or Adventurer\'s League Players Guide ' + \
+        f'On {channel_tutorial.mention}, you can also find the ALPG or Adventurers League Players Guide ' + \
         'in the pinned messages. That file contains all the information needed to create an AL-legal character. ' + \
         f'{channel_concept.mention} is the place where you can seek the wisdom and insight of the ' + \
         'admins, DMs, and seasoned players on how to progress your character.\n\n' + \
         f'{channel_game_sched.mention} lists the upcoming games for the week. ' + \
         f'To discuss game schedules and interest checks, kindly head to {channel_lfg.mention}. ' + \
-        f'Just above it is {channel_lfp.mention} where DM\'s post scheduled games.' + \
-        'Most games on this server are Tier 1 or for characters of level 1-4.' + \
+        f'Just above it is {channel_lfp.mention} where DMs post scheduled games. ' + \
+        'Most games on this server are Tier 1 or for characters of level 1-4. ' + \
         'On occasion, higher tier games are played to show the newbies how advance mods ' + \
         'are run and how players handle adventures of higher difficulty. ' + \
         f'{channel_roll20.mention} is where you may find the essential information needed ' + \
