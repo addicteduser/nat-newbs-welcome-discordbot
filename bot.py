@@ -39,7 +39,7 @@ async def on_command_error(ctx, error):
     if isinstance(error, commands.errors.CommandError):
         await ctx.send(f'Apologies, Master {ctx.author.mention}. I am but a simple AI. '
                        'I don\'t know how to respond to that at the moment. Perhaps my human consciousness '
-                       f'{get_human_welcome_wagon().mention} knows how.')
+                       f'{get_human_welcome_wagon(ctx.guild).mention} knows how.')
 
 
 # def log_error(error, msg):
@@ -61,7 +61,7 @@ async def greet(ctx, members: commands.Greedy[discord.Member] = None, *args):
     await ctx.send(get_welcome_message(ctx.guild, members))
 
 
-def get_human_welcome_wagon():
+def get_human_welcome_wagon(guild):
     return get(guild.members, name='chefcy2017')
 
 
@@ -87,7 +87,7 @@ def get_welcome_message(guild, members):
     welcome_message = welcome_message + 'Welcome to the Natural Newbies server! ' + \
         'I am `Welcome Wagon`, a semi-sentient Help AI. As the server\'s semi-sentient Help AI, ' + \
         f'I advise you to please head to {channel_server_guide.mention} in order to get started. ' + \
-        f'You may also call my human consciousness, aka {get_human_welcome_wagon().mention}, "Jed".\n\n' + \
+        f'You may also call my human consciousness, aka {get_human_welcome_wagon(guild).mention}, "Jed".\n\n' + \
         f'There is the {channel_tutorial.mention} for D&D related questions that I, ' + \
         f'the {role_admin.mention}, and {role_dm.mention} would be happy to answer. ' + \
         f'On {channel_tutorial.mention}, you can also find the ALPG or Adventurer\'s League Players Guide ' + \
