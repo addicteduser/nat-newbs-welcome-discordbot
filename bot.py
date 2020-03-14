@@ -102,7 +102,7 @@ def get_welcome_message(guild, members):
         'are run and how players handle adventures of higher difficulty. ' + \
         f'{channel_roll20.mention} is where you may find the essential information needed ' + \
         'to use Roll20 properly, although questions are still welcomed if there are some confusion.\n\n' + \
-        'Feel free to use __***The Pissing Yawa***__ (https://app.roll20.net/campaigns/details/5530304/the-pissing-yawa) ' + \
+        'Feel free to use __**The Pissing Yawa**__ (https://app.roll20.net/campaigns/details/5530304/the-pissing-yawa) ' + \
         f'as a character vault. Just ask any of our ~~overlords~~, I mean, {role_admin.mention} and {role_dm.mention}, ' + \
         'to make a folder for you and/or import your character/s to other Roll20 rooms.'
 
