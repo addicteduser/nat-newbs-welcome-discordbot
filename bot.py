@@ -57,7 +57,7 @@ async def on_member_join(member):
 
 
 @bot.command()
-async def greet(ctx, members: commands.Greedy[discord.Member] = None, *args):
+async def greet2(ctx, members: commands.Greedy[discord.Member] = None, *args):
     await ctx.send(get_welcome_message(ctx.guild, members))
 
 
