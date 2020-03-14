@@ -88,7 +88,7 @@ def get_welcome_message(guild, members):
         'I am `Welcome Wagon`, a semi-sentient Help AI. As the server\'s semi-sentient Help AI, ' + \
         f'I advise you to please head to {channel_server_guide.mention} in order to get started. ' + \
         f'You may also call my human consciousness, aka {get_human_welcome_wagon(guild).mention}, "Jed".\n\n' + \
-        f'There is the {channel_tutorial.mention} for D&D related questions that I, ' + \
+        f'There is the {channel_tutorial.mention} for D&D related questions that my human consciousness, ' + \
         f'the {role_admin.mention}, and {role_dm.mention} would be happy to answer. ' + \
         f'On {channel_tutorial.mention}, you can also find the ALPG or Adventurers League Players Guide ' + \
         'in the pinned messages. That file contains all the information needed to create an AL-legal character. ' + \
@@ -101,7 +101,10 @@ def get_welcome_message(guild, members):
         'On occasion, higher tier games are played to show the newbies how advance mods ' + \
         'are run and how players handle adventures of higher difficulty. ' + \
         f'{channel_roll20.mention} is where you may find the essential information needed ' + \
-        'to use Roll20 properly, although questions are still welcomed if there are some confusion.'
+        'to use Roll20 properly, although questions are still welcomed if there are some confusion.\n\n' + \
+        'Feel free to use __***The Pissing Yawa***__ (https://app.roll20.net/campaigns/details/5530304/the-pissing-yawa) ' + \
+        f'as a character vault. Just ask any of our ~~overlords~~, I mean, {role_admin.mention} and {role_dm.mention}, ' + \
+        'to make a folder for you and/or import your character/s to other Roll20 rooms.'
 
     return welcome_message
 
