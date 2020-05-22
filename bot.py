@@ -7,7 +7,7 @@ from discord.utils import get
 # from secrets import DISCORD_TOKEN
 # token = DISCORD_TOKEN
 
-for deployment
+# for deployment
 token = os.environ['DISCORD_TOKEN']
 
 
