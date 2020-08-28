@@ -1,5 +1,6 @@
 import os
 import discord
+import asyncio
 from discord.ext import commands
 from discord.utils import get
 
@@ -16,11 +17,10 @@ bot = commands.Bot(command_prefix=commands.when_mentioned,
                    description='Natural Newbies server\'s personal welcome bot.',
                    help_command=None)
 
+
 #######################
 ## DISCORD BOT START ##
 #######################
-
-
 @bot.event
 async def on_ready():
     print(f'{bot.user.name} has connected to Discord!')
@@ -29,14 +29,14 @@ async def on_ready():
     for guild in bot.guilds:
         print(f' >> {guild.name}')
 
+
 #########################
 ## DISCORD BOT LOGGING ##
 #########################
-
-
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.errors.CommandError):
+        await bot_typing(ctx, 5)
         await ctx.send(f'Apologies, Master {ctx.author.mention}. I am but a simple AI. '
                        'I don\'t know how to respond to that at the moment. Perhaps my human consciousness '
                        f'{get_human_welcome_wagon(ctx.guild).mention} knows how.')
@@ -48,17 +48,65 @@ async def on_command_error(ctx, error):
 
 @bot.event
 async def on_member_join(member):
-    channel_lobby = get(member.guild.channels, name="lobby")
-    await channel_lobby.send(get_welcome_message(member.guild, [member]))
+    channel_welcome = get(member.guild.channels, name="welcome")
+    await bot_typing(ctx, 3)
+    await channel_welcome.send(get_welcome_message(member.guild, [member]))
+
 
 ##################
 ## BOT COMMANDS ##
 ##################
+@bot.command()
+async def greet(ctx, members: commands.Greedy[discord.Member] = None, *args):
+    await bot_typing(ctx, 5)
+    await ctx.send(get_welcome_message(ctx.guild, members))
 
 
 @bot.command()
-async def greet(ctx, members: commands.Greedy[discord.Member] = None, *args):
-    await ctx.send(get_welcome_message(ctx.guild, members))
+async def vault(ctx):
+    await bot_typing(ctx, 5)
+    await ctx.send(
+        f'Salutations, Master {ctx.author.mention}. Here is the link to '
+        '__**The Natural Newbie Vault**__: https://app.roll20.net/join/7260172/yvr0fg. '
+        'Feel free to use it as a character vault. Just ask any of our ~~overlords~~, '
+        'I mean, Admins and Dungeon Masters, to make a folder for you and/or '
+        'provide you with more blank character sheets.')
+
+
+@bot.command()
+async def hello(ctx):
+    await bot_typing(ctx, 3)
+    await ctx.send(get_greetings(ctx))
+
+
+@bot.command()
+async def hi(ctx):
+    await bot_typing(ctx, 3)
+    await ctx.send(get_greetings(ctx))
+
+
+@bot.command()
+async def henlo(ctx):
+    await bot_typing(ctx, 3)
+    await ctx.send(get_greetings(ctx))
+
+
+@bot.command()
+async def hewwo(ctx):
+    await bot_typing(ctx, 3)
+    await ctx.send(get_greetings(ctx))
+
+
+######################
+## HELPER FUNCTIONS ##
+######################
+async def bot_typing(ctx, time):
+    await ctx.trigger_typing()
+    await asyncio.sleep(time)
+
+
+def get_greetings(ctx):
+    return f'{ctx.command.name.capitalize()}, Master {ctx.author.mention}! :smile:'
 
 
 def get_human_welcome_wagon(guild):
@@ -66,29 +114,22 @@ def get_human_welcome_wagon(guild):
 
 
 def get_welcome_message(guild, members):
-    role_admin = get(guild.roles, name='@Admin')
-    role_dm = get(guild.roles, name='Dungeon Masters')
-
+    channel_about = get(guild.channels, name='about')
     channel_server_guide = get(guild.channels, name='server-guide')
-    channel_tutorial = get(
-        guild.channels, name='seeking-help-and-tutorial')
-    channel_concept = get(guild.channels, name='concept')
-    channel_lfg = get(guild.channels, name='looking-for-games')
-    channel_lfp = get(guild.channels, name='looking-for-players')
-    channel_game_sched = get(guild.channels, name='game-schedule')
-    channel_roll20 = get(guild.channels, name='roll20-guides')
 
     welcome_message = ''
 
     if members is not None:
         newbies = ", ".join(newb.mention for newb in members)
-        welcome_message = f'Hello, {newbies}!\n\n'
+        welcome_message = f'Greetings, {newbies}! '
 
     welcome_message = welcome_message + \
-        f'Welcome to the Natural Newbie server! I am `Welcome Wagon`, the server\'s semi-sentient Help AI. As such, I advise you to please head to {channel_server_guide.mention} in order to get started. You may also call my human consciousness, aka {get_human_welcome_wagon(guild).mention}, "Jed".\n\n' + \
-        f'There is the {channel_tutorial.mention} for D&D-related questions that my human consciousness, the {role_admin.mention}, and the {role_dm.mention} would be happy to answer. It\'s there that you can also find the Adventurers League Players Guide (ALPG) in the pinned messages. That file contains all the information needed to create an AL-legal character. {channel_concept.mention} is the place where you can seek the wisdom and insight of the seasoned players and DMs on how to progress a specific character concept and build.\n\n' + \
-        f'{channel_game_sched.mention} lists the upcoming games for the week. To discuss these, kindly head to {channel_lfg.mention}. Just above it is {channel_lfp.mention} where DMs post their scheduled sessions. Most games on this server are for characters from level 1-4 (Tier 1). On occasion, higher-tier games are run to show the newbies how more experienced players handle adventures of higher difficulty. {channel_roll20.mention} is where you may find essential information on using Roll20 properly, although you may still ask questions if you have any.\n\n' + \
-        f'Feel free to use __**The Natural Newbie Vault**__ (https://app.roll20.net/join/7260172/yvr0fg) as a character vault. Just ask any of our ~~overlords~~, I mean, {role_admin.mention} and {role_dm.mention}, to make a folder for you and/or import your character/s from other Roll20 rooms.'
+        f'Welcome to the __**Natural Newbie**__ server! I am `Welcome Wagon`, ' + \
+        'the server\'s semi-sentient Help AI. As such, I advise you to please ' + \
+        f'head to {channel_about.mention} in order to get started. ' + \
+        f'If you are lost, kindly refer to the {channel_server_guide.mention}. ' + \
+        'You may also seek assisstance from my human consciousness, aka ' + \
+        f'"Jed" ({get_human_welcome_wagon(guild).mention}).'
 
     return welcome_message
 
