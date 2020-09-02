@@ -49,7 +49,7 @@ async def on_command_error(ctx, error):
 @bot.event
 async def on_member_join(member):
     channel_welcome = get(member.guild.channels, name="welcome")
-    await bot_typing(ctx, 3)
+    await bot_typing(channel_welcome, 3)
     await channel_welcome.send(get_welcome_message(member.guild, [member]))
 
 
